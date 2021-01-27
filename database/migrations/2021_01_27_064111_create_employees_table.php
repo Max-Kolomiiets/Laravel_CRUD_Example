@@ -14,7 +14,6 @@ class CreateEmployeesTable extends Migration
     public function up()
     {
         Schema::create('employees', function (Blueprint $table) {
-            //first name, last name, company (используя внешний ключ для связи (foreign)), email, phone
             $table->id();
             $table->foreignId('company_id');
             $table->string('name');
