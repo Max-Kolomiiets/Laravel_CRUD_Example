@@ -3,40 +3,37 @@
 @section('title', 'Companies list')
 
 @section('content')
+    <a class="btn btn-success" href="{{ route('companies.create') }}">Create new company</a>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
     @isset($companies)
     <table class="table">
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
         </tr>
         </thead>
         <tbody>
         @forelse ($companies as $company)
-        
-            
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <th scope="row">{{ $company->id }}</th>
+                <td>{{ $company->name }}</td>
+                <td>{{ $company->email }}</td>
+                <td style="display: flex;">
+                    <a class="btn btn-warning" href="">Edit</a>
+                    <a style="margin: 0 4px" class="btn btn-danger" href="">Delete</a>
+                </td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-            </tr>
-            
-        
         @empty
     
         @endforelse

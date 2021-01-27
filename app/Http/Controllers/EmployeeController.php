@@ -14,7 +14,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employees = Employee::get();
+
+        return view('admin-cms.employees.index', compact('employees'));
     }
 
     /**
