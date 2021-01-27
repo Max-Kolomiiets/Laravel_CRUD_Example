@@ -34,13 +34,15 @@ class CompanyRequest extends FormRequest
             ],
             'phone' => 'required|min:8|max:15',
             'website' => 'required|min:5|max:30',
-            'logo' => 'required|max:3000kb|Mimes:jpeg,jpg,gif,png| dimensions:min_width=100,min_height=100'
+            'logo' => 'max:3000kb|Mimes:jpeg,jpg,gif,png| dimensions:min_width=100,min_height=100'
         ];
 
         if (!empty($this->user)) {
             $rules['email'][] = ValidationRule::unique('users')->ignore($this->user->id);
+            
         } else {
             $rules['email'][] = ValidationRule::unique('users');
+            $rules['logo'] .= '|required';
         }
 
         return $rules;

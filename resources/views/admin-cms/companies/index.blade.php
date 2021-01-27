@@ -4,7 +4,7 @@
 
 @section('content')
     <a class="btn btn-success" href="{{ route('companies.create') }}">Create new company</a>
-    @if ($errors->any())
+    {{-- @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -12,7 +12,7 @@
             @endforeach
         </ul>
     </div>
-@endif
+@endif --}}
 
     @isset($companies)
     <table class="table">
@@ -30,8 +30,9 @@
                 <td>{{ $company->name }}</td>
                 <td>{{ $company->email }}</td>
                 <td style="display: flex;">
-                    <a class="btn btn-warning" href="">Edit</a>
-                    <a style="margin: 0 4px" class="btn btn-danger" href="">Delete</a>
+                    <a class="btn btn-warning" href="{{ route('companies.edit', $company) }}">Edit</a>
+                    <div style="margin: 0 4px"> @include('admin-cms.delete-form', ['route' => 'companies.destroy','company' => $company]) </div>
+                    {{-- <a style="margin: 0 4px" class="btn btn-danger" href="{{ route('companies.destroy', $company) }}">Delete</a> --}}
                 </td>
             </tr>
         @empty

@@ -40,7 +40,15 @@ class CompanyController extends Controller
         // $validated = $request->validated();
         // dd($validated);
 
-        return redirect()->route('companies.index')->withSuccess('Good !');
+        $pathToImage = $request->file('logo')->store('companies');
+        $data = $request->all();
+        $data['logo'] = $pathToImage;
+
+        //dd($data);
+
+        Company::create($data);
+
+        return redirect()->route('companies.index')->withSuccess($pathToImage);
     }
 
     /**
@@ -62,7 +70,7 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        //
+        return view('admin-cms/companies/form', compact('company'));
     }
 
     /**
@@ -72,9 +80,9 @@ class CompanyController extends Controller
      * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Company $company)
+    public function update(CompanyRequest $request, Company $company)
     {
-        //
+        return redirect()->route('companies.index')->withSuccess("Updated company: . $company->name");
     }
 
     /**
@@ -85,6 +93,7 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        $company->delete();
+        return redirect()->route('companies.index')->withDanger("Company: $company->name was removed!");
     }
 }
