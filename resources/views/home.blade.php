@@ -14,7 +14,9 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    <a class="btn btn-outline-secondary" href="{{ route('companies.index') }}">Companies</a>
+                    <a class="btn btn-outline-secondary" href="{{ route('employees.index') }}">Employees</a>
+             
                 </div>
             </div>
         </div>
