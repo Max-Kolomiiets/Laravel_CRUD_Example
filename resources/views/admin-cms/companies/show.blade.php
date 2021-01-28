@@ -19,7 +19,7 @@
             </ul>
             <div class="card-body d-flex">
                 <a class="btn btn-warning" href="{{ route('companies.edit', $company) }}">Edit</a>
-                <div style="margin: 0 4px"> @include('admin-cms.delete-form', ['route' => 'companies.destroy','company' => $company]) </div>
+                <div style="margin: 0 4px"> @include('admin-cms.companies.delete-form', ['route' => 'companies.destroy','company' => $company]) </div>
             </div>
         </div>
         

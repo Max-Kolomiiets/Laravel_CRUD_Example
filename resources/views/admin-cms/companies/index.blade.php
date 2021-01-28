@@ -32,7 +32,7 @@
                 <td style="display: flex; ">
                     <a class="btn btn-secondary" href="{{ route('companies.show', $company) }}">Info</a>
                     <a class="btn btn-warning" href="{{ route('companies.edit', $company) }}">Edit</a>
-                    <div style="margin: 0 4px"> @include('admin-cms.delete-form', ['route' => 'companies.destroy','company' => $company]) </div>
+                    <div style="margin: 0 4px"> @include('admin-cms.companies.delete-form', ['route' => 'companies.destroy','field' => $company]) </div>
                 </td>
             </tr>
         @empty
@@ -40,5 +40,8 @@
         @endforelse
     </tbody>
     </table>  
+    <div class="mx-auto text-center">
+        {{ $companies->onEachSide(5)->links() }}
+    </div>
     @endisset
 @endsection

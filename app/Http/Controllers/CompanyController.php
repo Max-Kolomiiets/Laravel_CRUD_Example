@@ -16,7 +16,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::all();
+        $companies = Company::paginate(7);
         return view('admin-cms.companies.index', compact('companies'));
     }
 
@@ -45,7 +45,7 @@ class CompanyController extends Controller
 
         Company::create($data);
 
-        return redirect()->route('companies.index')->withSuccess($pathToImage);
+        return redirect()->route('companies.index')->withSuccess("Company {$data['name']} was created!");
     }
 
     /**
@@ -94,7 +94,7 @@ class CompanyController extends Controller
        }
 
         
-        return redirect()->route('companies.index')->withSuccess("Updated company: . $company->name");
+        return redirect()->route('companies.index')->withSuccess("Updated company: $company->name");
     }
 
     /**

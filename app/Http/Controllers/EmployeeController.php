@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Employee;
+use App\Http\Requests\EmployeeRequest;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -14,7 +15,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::get();
+        $employees = Employee::paginate(10);
 
         return view('admin-cms.employees.index', compact('employees'));
     }
@@ -26,7 +27,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin-cms/employees/form');
     }
 
     /**
@@ -35,9 +36,12 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
-        //
+        $data = $request->all();
+        Employee::create($data);
+
+        return redirect()->route('employees.index')->withSuccess("{$data['name']} was created!");
     }
 
     /**
@@ -48,7 +52,7 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        //
+        return view('admin-cms/employees/show', compact('employee'));
     }
 
     /**
@@ -59,7 +63,7 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        return view('admin-cms/employees/form', compact('employee'));
     }
 
     /**
@@ -69,9 +73,11 @@ class EmployeeController extends Controller
      * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(EmployeeRequest $request, Employee $employee)
     {
-        //
+        $data = $request->all();
+        $employee->update($data);
+        return redirect()->route('employees.index')->withSuccess("Updated employee $employee->name");
     }
 
     /**
@@ -82,6 +88,7 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        $employee->delete();
+        return redirect()->route('employees.index')->withDanger("Employee: $employee->name was removed!");
     }
 }

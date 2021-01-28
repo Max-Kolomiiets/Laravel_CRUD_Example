@@ -23,11 +23,12 @@
                 <td>{{ $employee->lastname }}</td>
                 <td>{{ $employee->email }}</td>
                 <td>{{ $employee->phone }}</td>
-                <td>{{ $employee->company->name }}</td>
+                <td>{{ isset($employee->company) ? $employee->company->name : "No Company | Hired" }}</td>
                 
-                <td style="display: flex;">
-                    <a class="btn btn-warning" href="">Edit</a>
-                    <a style="margin: 0 4px" class="btn btn-danger" href="">Delete</a>
+                <td style="display: flex; ">
+                    <a class="btn btn-secondary" href="{{ route('employees.show', $employee) }}">Info</a>
+                    <a class="btn btn-warning" href="{{ route('employees.edit', $employee) }}">Edit</a>
+                    <div style="margin: 0 4px"> @include('admin-cms.employees.delete-form', ['route' => 'employees.destroy','field' => $employee]) </div>
                 </td>
             </tr>
         @empty
@@ -35,5 +36,8 @@
         @endforelse
     </tbody>
     </table>  
+    <div class="mx-auto text-center">
+        {{ $employees->onEachSide(5)->links() }}
+    </div>
     @endisset
 @endsection
