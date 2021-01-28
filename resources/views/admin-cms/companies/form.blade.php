@@ -1,7 +1,10 @@
 @extends('admin-cms.layouts.app')
 
+@section('title', isset($company) ? "Edit Company" : "Create Company")
+
 @section('content')
-    <h2>Create Company</h2>
+    
+    <a class="btn btn-secondary" href="{{ route('companies.index') }}">Back to Companies</a>
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>

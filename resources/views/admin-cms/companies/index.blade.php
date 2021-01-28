@@ -29,10 +29,10 @@
                 <th scope="row">{{ $company->id }}</th>
                 <td>{{ $company->name }}</td>
                 <td>{{ $company->email }}</td>
-                <td style="display: flex;">
+                <td style="display: flex; ">
+                    <a class="btn btn-secondary" href="{{ route('companies.show', $company) }}">Info</a>
                     <a class="btn btn-warning" href="{{ route('companies.edit', $company) }}">Edit</a>
                     <div style="margin: 0 4px"> @include('admin-cms.delete-form', ['route' => 'companies.destroy','company' => $company]) </div>
-                    {{-- <a style="margin: 0 4px" class="btn btn-danger" href="{{ route('companies.destroy', $company) }}">Delete</a> --}}
                 </td>
             </tr>
         @empty

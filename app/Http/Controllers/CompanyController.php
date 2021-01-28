@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Company;
 use App\Http\Requests\CompanyRequest;
 use Illuminate\Http\Request;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class CompanyController extends Controller
 {
@@ -37,14 +38,10 @@ class CompanyController extends Controller
      */
     public function store(CompanyRequest $request)
     {
-        // $validated = $request->validated();
-        // dd($validated);
 
         $pathToImage = $request->file('logo')->store('companies');
         $data = $request->all();
         $data['logo'] = $pathToImage;
-
-        //dd($data);
 
         Company::create($data);
 
@@ -59,7 +56,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //
+        return view('admin-cms/companies/show', compact('company'));
     }
 
     /**
@@ -82,6 +79,21 @@ class CompanyController extends Controller
      */
     public function update(CompanyRequest $request, Company $company)
     {
+        $data = [];
+       if (!empty($request['logo'])) {
+            $pathToImage = $request->file('logo')->store('companies');
+            $data = $request->all();
+            $data['logo'] = $pathToImage;
+
+            $company->update($data);
+       } else {
+            $data = $request->all();
+            $data['logo'] = $company->logo;
+
+            $company->update($data);
+       }
+
+        
         return redirect()->route('companies.index')->withSuccess("Updated company: . $company->name");
     }
 

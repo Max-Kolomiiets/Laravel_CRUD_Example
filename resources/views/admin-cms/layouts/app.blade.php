@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'admin')</title>
 
-    <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css"
+     rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
     <meta name="theme-color" content="#7952b3">
     <style>
@@ -29,7 +31,7 @@
 <body class="bg-light">
 
 <div class="container">
-    <h1>@yield('title')</h1>
+    <h1 class="text-center">@yield('title')</h1>
     <main>
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>

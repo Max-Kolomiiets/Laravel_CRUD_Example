@@ -37,9 +37,11 @@ class CompanyRequest extends FormRequest
             'logo' => 'max:3000kb|Mimes:jpeg,jpg,gif,png| dimensions:min_width=100,min_height=100'
         ];
 
-        if (!empty($this->user)) {
-            $rules['email'][] = ValidationRule::unique('users')->ignore($this->user->id);
-            
+        
+
+        if (!empty($this->company)) {
+            $rules['email'][] = ValidationRule::unique('users')->ignore($this->company->id);
+
         } else {
             $rules['email'][] = ValidationRule::unique('users');
             $rules['logo'] .= '|required';
@@ -53,7 +55,7 @@ class CompanyRequest extends FormRequest
         return [
             'email.required' => 'Email is required!',
             'name.required' => 'Name is required!',
-            'password.required' => 'Password is required!'
+            'phone.required' => 'Phone is required!'
         ];
     }
 }
