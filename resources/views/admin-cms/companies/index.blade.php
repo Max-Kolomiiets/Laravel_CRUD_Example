@@ -4,15 +4,6 @@
 
 @section('content')
     <a class="btn btn-success" href="{{ route('companies.create') }}">Create new company</a>
-    {{-- @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif --}}
 
     @isset($companies)
     <table class="table">

@@ -13,7 +13,7 @@ class EmployeeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -27,7 +27,8 @@ class EmployeeRequest extends FormRequest
             'name' => 'required|min:2max:50',
             'lastname' => 'required|min:2|max:50',
             'email' => 'required|email|min:5|max:50',
-            'phone' => 'required|min:8|max:16',
+            'phone' => 'required|min:8|max:25',
+            'company_id' => 'required'
         ];
     }
 }

@@ -31,7 +31,7 @@
         </div>
         <div class="form-group mt-3">
             <label for="name">Last Name</label>
-            <input type="text" class="form-control" id="lastname" name="lastname" value="{{ old('name', isset($employee) ? $employee->name : "") }}"  placeholder="Enter last name" required>
+            <input type="text" class="form-control" id="lastname" name="lastname" value="{{ old('lastname', isset($employee) ? $employee->lastname : "") }}"  placeholder="Enter last name" required>
         </div>
         <div class="form-group mt-3">
             <label for="email">Email address</label>
@@ -40,9 +40,17 @@
         </div>
         <div class="form-group mt-3">
             <label for="phone">Phone</label>
-            <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone'), isset($employee) ? $employee->phone : "" }}"  placeholder="Enter phone" required>
+            <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone', isset($employee) ? $employee->phone : "") }}"  placeholder="Enter phone" >
+        </div>
+        <div class="form-group mt-3">
+            <label for="phone">Select Company</label>
+            <select name="company_id" id="company_id">
+                @foreach ($companies as $company)
+                    <option value="{{ $company->id }}">{{ $company->name }}</option>
+                @endforeach
+            </select>
         </div>
 
-        <button class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary mt-3">Submit</button>
     </form>
 @endsection

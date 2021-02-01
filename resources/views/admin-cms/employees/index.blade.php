@@ -3,6 +3,8 @@
 @section('title', 'Employees list')
 
 @section('content')
+    <a class="btn btn-success" href="{{ route('employees.create') }}">Create new Employee</a>
+
     @isset($employees)
     <table class="table">
         <thead>

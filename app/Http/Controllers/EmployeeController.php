@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use App\Employee;
 use App\Http\Requests\EmployeeRequest;
 use Illuminate\Http\Request;
@@ -27,7 +28,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('admin-cms/employees/form');
+        $companies = Company::get();
+        return view('admin-cms/employees/form', compact('companies'));
     }
 
     /**
@@ -63,7 +65,11 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        return view('admin-cms/employees/form', compact('employee'));
+        $companies = Company::get();
+        return view('admin-cms/employees/form', [
+            'employee' => $employee,
+            'companies' => $companies
+        ]);
     }
 
     /**
@@ -76,7 +82,16 @@ class EmployeeController extends Controller
     public function update(EmployeeRequest $request, Employee $employee)
     {
         $data = $request->all();
-        $employee->update($data);
+
+        $updateData = [
+            'company_id' => $data['company_id'],
+            'name' => $data['name'],
+            'lastname' => $data['lastname'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+        ];
+
+        $employee->update($updateData);
         return redirect()->route('employees.index')->withSuccess("Updated employee $employee->name");
     }
 

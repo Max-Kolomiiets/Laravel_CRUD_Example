@@ -32,7 +32,7 @@ class CompanyRequest extends FormRequest
                 'max:255',
                 'email',
             ],
-            'phone' => 'required|min:8|max:15',
+            'phone' => 'required|min:8|max:25',
             'website' => 'required|min:5|max:30',
             'logo' => 'max:3000kb|Mimes:jpeg,jpg,gif,png| dimensions:min_width=100,min_height=100'
         ];

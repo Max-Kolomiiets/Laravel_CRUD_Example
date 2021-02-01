@@ -36,11 +36,11 @@
         </div>
         <div class="form-group mt-3">
             <label for="phone">Phone</label>
-            <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone'), isset($company) ? $company->phone : "" }}"  placeholder="Enter phone" required>
+            <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone', isset($company) ? $company->phone : "") }}"  placeholder="Enter phone" required>
         </div>
         <div class="form-group mt-3">
             <label for="website">Website</label>
-            <input type="text" class="form-control" id="website" name="website" value="{{ old('website'), isset($company) ? $company->website : "" }}"  placeholder="Enter website" required>
+            <input type="text" class="form-control" id="website" name="website" value="{{ old('website', isset($company) ? $company->website : "") }}"  placeholder="Enter website" required>
         </div>
         <div class="form-group mt-3">
             <label for="file">Select logo</label>
